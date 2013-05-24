@@ -1,0 +1,44 @@
+		#if profile exist
+			#update the profile with new values
+			
+		#else
+			#create a new profile and update
+		
+		#fetch the profile and renderit in home
+		
+		try:
+			userid = profile.userid
+			key = profile.key()
+			updated_profile = ExecProfile.get(key)
+			updated_profile.userid = user.nickname()
+			updated_profile.name = self.request.get('name')
+			updated_profile.tagline = self.request.get('tagline')
+			updated_profile.bio = self.request.get('bio')
+			try:
+				avatar = db.Blob(self.request.get('img'))
+			except TypeError:
+				avatar = False
+			
+			if avatar:
+				updated_profile.avatar = avatar	  
+			
+			updated_profile.put()
+			msg="no profile"
+		  
+		except AttributeError:
+			userid = user.nickname()
+			profile = ExecProfile(key_name=userid)
+			profile.userid = userid
+			profile.name = self.request.get('name')
+			profile.tagline = self.request.get('tagline')
+			profile.bio = self.request.get('bio')
+
+			try:
+				avatar = db.Blob(self.request.get('img'))
+			except TypeError:
+				avatar = False
+			
+			if avatar:
+				profile.avatar = avatar	
+				
+			profile.put()

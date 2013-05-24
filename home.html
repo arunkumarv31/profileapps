@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Home</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="tts">
+    {% if user_is_logged %}
+      <div class="tls"><a href="{{user_nickname}}">Profile</a></div>
+    {%endif%}
+      <div class="tls"><a href="/gangaeyam/about">About</a></div> 
+      <div class="tls"><a href="{{user_url}}" class="tls">{{user_url_key}}</a></div>
+    </div>
+  </div>
+  
+  
+	{% if user_is_logged %}
+		<div id="container">
+			<form action=""  enctype="multipart/form-data" method="post" align="left">
+			<!--div id="header">
+				<h1>
+					Update the profile details.
+				</h1>
+			</div-->
+			<div id="content-container">
+				<div id="content">
+					<h3>
+						Update your details.
+					</h3>
+					<p>
+						<input type="text" class="inputf" name="name" value="{{profile.name}}"> Name
+					</p>
+					<p>
+						<input type="text" class="inputf" name="tagline" value="{{profile.tagline}}"> Tagline
+					</p>
+					<p>
+						<input type="text" class="inputf" name="mobile" value="{{profile.mobile}}"> Mobile
+					</p>
+					<p>
+						<input type="text" class="inputf" name="email" value="{{profile.email}}"> Email
+					</p>
+					<p>
+						<textarea name="bio">{{profile.bio}}</textarea>
+					</p>
+					<p>It is an html editor. So use &lt;br&gt; for newline and &lt;br&gt;&lt;br&gt;for a blankline</p>
+
+				</div>
+				<div id="aside">
+					<h3>
+						Profile picture
+					</h3>
+					<p>
+						<img width="150px" height="150px" src="{{data_uri}}"></img>
+					</p>
+					<p>
+						Choose a 200x200 jpg
+					</p>
+					<p>
+						<input type="file" name="img"/>
+					</p>
+					<p>
+						<input type="submit" name="update" value="Update" class="maia-button">
+					</p>
+
+				</div>
+				<div id="footer">
+
+				</div>
+			</div>
+			</form>
+		</div>
+      
+
+		
+
+		
+
+  {% else %}
+    <div class="main-box">
+      <div class="welcome-text">
+        <h1>Welcome to profiles</h1>
+        Signin with your Google account and get your google id as profile id.<br>
+        <p><a href="{{user_url}}"><input type="submit" value="Sign in" class="maia-button"/></a></p>
+      </div>
+    </div>
+  {%endif%}
+  
+  
+</body>
+</html>
